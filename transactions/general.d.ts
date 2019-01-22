@@ -1,7 +1,7 @@
-export * from './sign';
-export * from './api';
 import { DATA_FIELD_TYPE, TRANSACTION_TYPE } from '..';
 
+
+export type TOrderType = 'sell' | 'buy';
 
 export interface IWithId {
     id: string;
@@ -67,7 +67,7 @@ export interface IExchangeTransactionOrder<LONG> {
         amountAsset: string;
         priceAsset: string;
     },
-    orderType: string;
+    orderType: TOrderType;
     price: LONG;
     amount: LONG;
     timestamp: number;
@@ -115,14 +115,13 @@ export type TTransactionMap<LONG> = {
     [TRANSACTION_TYPE.EXCHANGE]: IExchangeTransaction<LONG>,
 };
 
-export interface IIssueTransaction<LONG> extends ITransaction<LONG> {
+export interface IIssueTransaction<LONG> extends ITransaction<LONG>, Partial<IWithChainId> {
     type: TRANSACTION_TYPE.ISSUE
     name: string;
     description: string;
     decimals: number;
     quantity: LONG;
     reissuable: boolean;
-    chainId: number;
     script?: string;
 }
 
@@ -142,7 +141,7 @@ export interface IReissueTransaction<LONG> extends ITransaction<LONG> {
     reissuable: boolean;
 }
 
-export interface IBurnTransaction<LONG> extends ITransaction<LONG> {
+export interface IBurnTransaction<LONG> extends ITransaction<LONG>, Partial<IWithChainId> {
     type: TRANSACTION_TYPE.BURN;
     assetId: string;
     quantity: LONG;
@@ -154,7 +153,7 @@ export interface ILeaseTransaction<LONG> extends ITransaction<LONG> {
     recipient: string;
 }
 
-export interface ICancelLeaseTransaction<LONG> extends ITransaction<LONG> {
+export interface ICancelLeaseTransaction<LONG> extends ITransaction<LONG>, Partial<IWithChainId> {
     type: TRANSACTION_TYPE.CANCEL_LEASE;
     leaseId: string;
 }
@@ -167,8 +166,8 @@ export interface IAliasTransaction<LONG> extends ITransaction<LONG> {
 export interface IMassTransferTransaction<LONG> extends ITransaction<LONG> {
     type: TRANSACTION_TYPE.MASS_TRANSFER;
     transfers: IMassTransferItem<LONG>;
-    assetId?: string;
-    attachment?: string;
+    assetId: string;
+    attachment: string;
 }
 
 export interface IDataTransaction<LONG> extends ITransaction<LONG> {
@@ -178,14 +177,20 @@ export interface IDataTransaction<LONG> extends ITransaction<LONG> {
 
 export interface IExchangeTransaction<LONG> extends ITransaction<LONG> {
     type: TRANSACTION_TYPE.EXCHANGE;
+    price: LONG;
+    amount: LONG;
+    buyMatcherFee: LONG;
+    sellMatcherFee: LONG;
+    order1: IExchangeTransactionOrder<LONG>;
+    order2: IExchangeTransactionOrder<LONG>;
 }
 
-export interface ISetScriptTransaction<LONG> extends ITransaction<LONG> {
+export interface ISetScriptTransaction<LONG> extends ITransaction<LONG>, IWithChainId {
     type: TRANSACTION_TYPE.SET_SCRIPT;
-    script: string | null //base64
+    script: string | null; //base64
 }
 
-export interface ISponsorship<LONG> extends ITransaction<LONG> {
+export interface ISponsorship<LONG> extends ITransaction<LONG>, IWithChainId {
     type: TRANSACTION_TYPE.SPONSORSHIP;
     assetId: string;
     minSponsoredAssetFee: LONG;

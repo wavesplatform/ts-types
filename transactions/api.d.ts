@@ -10,11 +10,37 @@ import {
     IExchangeTransactionOrder,
     TRANSACTION_TYPE
 } from '..';
+import {
+    IIssueTransaction,
+    ITransferTransaction,
+    IReissueTransaction,
+    IBurnTransaction,
+    ILeaseTransaction,
+    ICancelLeaseTransaction,
+    IAliasTransaction,
+    IMassTransferTransaction,
+    IDataTransaction,
+    ISetScriptTransaction,
+    ISponsorship,
+    IExchangeTransaction
+} from './general';
 
 export namespace api {
 
-    export type TProofsOrSignature = IWithProofs & IWithVersion | IWithSignature;
-    export type TBaseAPITransaction<LONG> = ITransaction<LONG> & IWithId & IWithSender & TProofsOrSignature;
+    export type TExchangeTransactionOrder<LONG> =
+        IExchangeTransactionOrder<LONG>
+        & IWithId
+        & IWithSender
+        & IWithProofs
+        & IWithSignature
+        & IWithVersion;
+
+    export type TBaseAPITransaction<LONG> = ITransaction<LONG> &
+        IWithId &
+        IWithSender &
+        IWithProofs &
+        IWithSignature &
+        IWithVersion;
 
     export type TTransaction<LONG> =
         TIssueTransaction<LONG> |
@@ -45,97 +71,30 @@ export namespace api {
         [TRANSACTION_TYPE.EXCHANGE]: TExchangeTransaction<LONG>
     };
 
-    export type TIssueTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.ISSUE
-        chainId: number;
-        name: string;
-        description: string;
-        decimals: number;
-        quantity: LONG;
-        reissuable: boolean;
-        script?: string;
-    };
+    export type TIssueTransaction<LONG> = TBaseAPITransaction<LONG> & IIssueTransaction<LONG>;
 
-    export type TTransferTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.TRANSFER;
-        recipient: string;
-        amount: LONG;
-        feeAssetId: string;
-        assetId: string;
-        attachment: string;
-    }
+    export type TTransferTransaction<LONG> = TBaseAPITransaction<LONG> & ITransferTransaction<LONG>;
 
-    export type TReissueTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.REISSUE;
-        chainId: number;
-        assetId: string;
-        quantity: LONG;
-        reissuable: boolean;
-    }
+    export type TReissueTransaction<LONG> = TBaseAPITransaction<LONG> & IReissueTransaction<LONG>;
 
-    export type TBurnTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.BURN;
-        chainId: number;
-        assetId: string;
-        quantity: LONG;
-    }
+    export type TBurnTransaction<LONG> = TBaseAPITransaction<LONG> & IBurnTransaction<LONG>;
 
-    export type TLeaseTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.LEASE;
-        amount: LONG;
-        recipient: string;
-    }
-
-    export type TCancelLeaseTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.CANCEL_LEASE;
-        chainId: number;
-        leaseId: string;
-    }
-
-    export type TAliasTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.ALIAS;
-        alias: string;
-    }
-
-    export type TMassTransferTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.MASS_TRANSFER;
-        transfers: IMassTransferItem<LONG>;
-        assetId: string;
-        attachment: string;
-    }
-
-    export type TDataTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.DATA;
-        data: Array<TDataTransactionEntry<LONG>>;
-    }
-
-    export type TSetScriptTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.SET_SCRIPT;
-        chainId: number;
-        script: string | null; //base64
-    }
-
-    export type TSponsorship<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.SPONSORSHIP;
-        chainId: number;
-        assetId: string;
-        minSponsoredAssetFee: LONG;
-    }
-
-    export type TExchangeTransaction<LONG> = TBaseAPITransaction<LONG> & {
-        type: TRANSACTION_TYPE.EXCHANGE;
-        sender: string;
-        price: LONG;
-        amount: LONG;
-        buyMatcherFee: LONG;
-        sellMatcherFee: LONG;
+    export type TExchangeTransaction<LONG> = TBaseAPITransaction<LONG> & IExchangeTransaction<LONG> & {
         order1: TExchangeTransactionOrder<LONG>;
         order2: TExchangeTransactionOrder<LONG>;
     }
 
-    export type TExchangeTransactionOrder<LONG> =
-        IExchangeTransactionOrder<LONG>
-        & IWithId
-        & IWithSender
-        & TProofsOrSignature;
+    export type TLeaseTransaction<LONG> = TBaseAPITransaction<LONG> & ILeaseTransaction<LONG>;
+
+    export type TCancelLeaseTransaction<LONG> = TBaseAPITransaction<LONG> & ICancelLeaseTransaction<LONG>;
+
+    export type TAliasTransaction<LONG> = TBaseAPITransaction<LONG> & IAliasTransaction<LONG>;
+
+    export type TMassTransferTransaction<LONG> = TBaseAPITransaction<LONG> & IMassTransferTransaction<LONG>;
+
+    export type TDataTransaction<LONG> = TBaseAPITransaction<LONG> & IDataTransaction<LONG>;
+
+    export type TSetScriptTransaction<LONG> = TBaseAPITransaction<LONG> & ISetScriptTransaction<LONG>;
+
+    export type TSponsorship<LONG> = TBaseAPITransaction<LONG> & ISponsorship<LONG>;
 }
