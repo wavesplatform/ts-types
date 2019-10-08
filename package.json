@@ -1,6 +1,15 @@
 {
   "name": "@waves/ts-types",
-  "version": "0.1.0-beta",
+  "version": "0.2.0",
   "main": "dist/index.js",
-  "types": "index.ts"
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepublish": "tsc",
+    "postversion": "npm publish",
+    "postpublish": "git push",
+    "prepare": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^3.2.4"
+  }
 }
