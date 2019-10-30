@@ -14,6 +14,7 @@ export type TProofs = Array<string>;
 
 export interface IWithApiMixin extends IWithId, IWithProofs {
     sender: string;
+    height?: number;
 }
 
 type TExtendMap<MAP, EXTEND> = {
