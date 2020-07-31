@@ -44,7 +44,8 @@ export type TTransaction<LONG> =
     ISponsorshipTransaction<LONG> |
     IExchangeTransaction<LONG> |
     ISetAssetScriptTransaction<LONG> |
-    IInvokeScriptTransaction<LONG>;
+    IInvokeScriptTransaction<LONG> |
+    IUpdateAssetInfoTransaction<LONG>;
 
 export type TTransactionMap<LONG> = {
     [TRANSACTION_TYPE.ISSUE]: IIssueTransaction<LONG>,
@@ -60,7 +61,8 @@ export type TTransactionMap<LONG> = {
     [TRANSACTION_TYPE.SPONSORSHIP]: ISponsorshipTransaction<LONG>,
     [TRANSACTION_TYPE.EXCHANGE]: IExchangeTransaction<LONG>,
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: ISetAssetScriptTransaction<LONG>,
-    [TRANSACTION_TYPE.INVOKE_SCRIPT]: IInvokeScriptTransaction<LONG>
+    [TRANSACTION_TYPE.INVOKE_SCRIPT]: IInvokeScriptTransaction<LONG>,
+    [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: IUpdateAssetInfoTransaction<LONG>
 };
 
 export type TTransactionWithId<LONG> = TTransaction<LONG> & IWithId;
@@ -158,6 +160,12 @@ export interface IInvokeScriptTransaction<LONG> extends ITransaction<LONG, typeo
     payment: Array<IInvokeScriptPayment<LONG>> | null | undefined;
 }
 
+export interface IUpdateAssetInfoTransaction<LONG> extends ITransaction<LONG, typeof TRANSACTION_TYPE.UPDATE_ASSET_INFO> {
+    assetId: string;
+    name: string;
+    description: string;
+}
+
 export interface IIssueTransactionWithId<LONG> extends IIssueTransaction<LONG>, IWithId {
 }
 
@@ -200,6 +208,9 @@ export interface ISetAssetScriptTransactionWithId<LONG> extends ISetAssetScriptT
 export interface IInvokeScriptTransactionWithId<LONG> extends IInvokeScriptTransaction<LONG>, IWithId {
 }
 
+export interface IUpdateAssetInfoTransactionWithId<LONG> extends IUpdateAssetInfoTransaction<LONG>, IWithId {
+}
+
 export interface IIssueTransactionWithProofs<LONG> extends IIssueTransaction<LONG>, IWithProofs {
 }
 
@@ -240,4 +251,7 @@ export interface ISetAssetScriptTransactionWithProofs<LONG> extends ISetAssetScr
 }
 
 export interface IInvokeScriptTransactionWithProofs<LONG> extends IInvokeScriptTransaction<LONG>, IWithProofs {
+}
+
+export interface IUpdateAssetInfoTransactionWithProofs<LONG> extends IUpdateAssetInfoTransaction<LONG>, IWithProofs {
 }
