@@ -17,7 +17,8 @@ export interface IInvokeScriptPayment<LONG> {
 export type TInvokeScriptCallArgument<LONG> =
     IInvokeScriptCallStringOrBinaryArgument |
     IInvokeScriptCallBoolArgument |
-    IInvokeScriptCallIntArgument<LONG>;
+    IInvokeScriptCallIntArgument<LONG> |
+    IInvokeScriptCallListArgument<LONG>;
 
 export interface IInvokeScriptCallStringOrBinaryArgument {
     type: 'string' | 'binary';
@@ -32,6 +33,11 @@ export interface IInvokeScriptCallBoolArgument {
 export interface IInvokeScriptCallIntArgument<LONG> {
     type: 'integer';
     value: LONG;
+}
+
+export interface IInvokeScriptCallListArgument<LONG> {
+    type: 'list';
+    value: Exclude<TInvokeScriptCallArgument<LONG>, IInvokeScriptCallListArgument<LONG>>[];
 }
 
 export interface IWithProofs {
