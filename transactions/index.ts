@@ -140,6 +140,7 @@ export type AliasTransactionFields<LONG = Long> = {
 export type MassTransferTransactionFields<LONG = Long> = {
     transfers: Array<MassTransferItem<LONG>>;
     assetId: string | null;
+    attachment: Base58Bytes | null;
 }
 
 export type DataTransactionFields<LONG = Long> = {
