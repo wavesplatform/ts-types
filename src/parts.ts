@@ -104,6 +104,7 @@ export type ExchangeTransactionOrderData<LONG> = {
     expiration: number;
     matcherFee: LONG;
     senderPublicKey: string;
+    matcherFeeAssetId: string | null;
 };
 
 export type WithVersion<
