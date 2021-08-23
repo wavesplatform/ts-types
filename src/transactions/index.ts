@@ -63,6 +63,7 @@ export type TransactionMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransaction<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransaction<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransaction<LONG>;
+    [TRANSACTION_TYPE.INVOKE_EXPRESSION]: InvokeExpressionTransaction<LONG>;
 };
 
 export type TransactionVersionsMap<LONG = Long> = {
@@ -83,6 +84,7 @@ export type TransactionVersionsMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransactionMap<LONG>;
+    [TRANSACTION_TYPE.INVOKE_EXPRESSION]: InvokeExpressionTransaction<LONG>;
 };
 
 type Omit<A extends Record<string, any>, B extends keyof A> = {
