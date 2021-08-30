@@ -1,4 +1,4 @@
-export * from './transactions';
+export * from '../transactions';
 export * from './parts';
 
 export const GENESIS_TYPE = 1 as 1;

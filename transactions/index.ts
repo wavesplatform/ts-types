@@ -12,7 +12,7 @@ import {
     Base58Bytes,
     WithVersion,
     SignedIExchangeTransactionOrder,
-} from '../index';
+} from '../src';
 
 export type BaseTransaction<
     LONG = Long,
