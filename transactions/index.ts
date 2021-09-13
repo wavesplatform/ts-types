@@ -191,7 +191,7 @@ export type UpdateAssetInfoTransactionFields<LONG = Long> = {
 };
 
 export type InvokeExpressionTransactionFields<LONG = Long> = {
-    expression: string;
+    expression: Base64Script | null;
     feeAssetId: string | null;
 };
 
