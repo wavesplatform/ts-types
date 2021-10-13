@@ -11,6 +11,7 @@ import {
     SignedIExchangeTransactionOrder,
     TRANSACTION_TYPE,
     TransactionType,
+    TStateChanges,
     WithVersion,
 } from '../src';
 
@@ -196,7 +197,10 @@ export interface IUpdateAssetInfoTransaction<LONG = Long>
 
 export type EthereumTransactionFields<LONG = Long> = {
     payload:
-        | ({ type: 'invocation' } & InvokeScriptTransactionFields)
+        | ({
+              type: 'invocation';
+              stateChanges: TStateChanges;
+          } & InvokeScriptTransactionFields)
         | ({ type: 'transfer' } & Omit<
               TransferTransactionFields,
               'attachment'
