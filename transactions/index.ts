@@ -163,7 +163,7 @@ export type SetScriptTransactionFields<LONG = Long> = {
 
 export type SponsorshipTransactionFields<LONG = Long> = {
     assetId: string;
-    minSponsoredAssetFee: LONG;
+    minSponsoredAssetFee: LONG | null;
 }
 
 export type SetAssetScriptTransactionFields<LONG = Long> = {
