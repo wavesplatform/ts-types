@@ -44,7 +44,8 @@ export type Transaction<LONG = Long> =
     | SetAssetScriptTransaction<LONG>
     | InvokeScriptTransaction<LONG>
     | UpdateAssetInfoTransaction<LONG>
-    | EthereumTransaction<LONG>;
+    | EthereumTransaction<LONG>
+    | InvokeExpressionTransaction<LONG>;
 
 export type TransactionMap<LONG = Long> = {
     [TRANSACTION_TYPE.GENESIS]: GenesisTransaction<LONG>;
@@ -64,6 +65,7 @@ export type TransactionMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransaction<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransaction<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransaction<LONG>;
+    [TRANSACTION_TYPE.INVOKE_EXPRESSION]: InvokeExpressionTransaction<LONG>;
     [TRANSACTION_TYPE.ETHEREUM]: EthereumTransaction<LONG>;
 };
 
@@ -85,6 +87,7 @@ export type TransactionVersionsMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransactionMap<LONG>;
+    [TRANSACTION_TYPE.INVOKE_EXPRESSION]: InvokeExpressionTransaction<LONG>;
     [TRANSACTION_TYPE.ETHEREUM]: EthereumTransactionMap<LONG>;
 };
 
@@ -188,6 +191,11 @@ export type UpdateAssetInfoTransactionFields<LONG = Long> = {
     assetId: string;
     name: string;
     description: string;
+    feeAssetId: string | null;
+};
+
+export type InvokeExpressionTransactionFields<LONG = Long> = {
+    expression: Base64Script | null;
     feeAssetId: string | null;
 };
 
@@ -502,6 +510,12 @@ export type EthereumTransactionMap<LONG = Long> = {
     1: EthereumTransactionV1<LONG>;
 };
 
+//InvokeExpressionTransaction
+export type InvokeExpressionTransactionV1<LONG> = WithVersion<
+    InvokeExpressionTransactionFields<LONG> & BaseTransaction<LONG, 18>,
+    1
+>;
+
 //------------------------------------------------------------------------------------------
 //Transaction types
 export type GenesisTransaction<LONG = Long> = GenesisTransactionV1<LONG>;
@@ -577,6 +591,10 @@ export type UpdateAssetInfoTransaction<
 > = UpdateAssetInfoTransactionV1<LONG>;
 
 export type EthereumTransaction<LONG = Long> = EthereumTransactionV1<LONG>;
+
+export type InvokeExpressionTransaction<
+    LONG = Long
+> = InvokeExpressionTransactionV1<LONG>;
 
 //
 type TWithSignatureMap = {
