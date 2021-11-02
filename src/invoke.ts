@@ -1,6 +1,6 @@
 import { Base64string, Long } from './common';
 
-export enum EInvokeArgumentType {
+export enum InvokeArgumentType {
     INTEGER = 'integer',
     STRING = 'string',
     BOOLEAN = 'boolean',
@@ -23,13 +23,13 @@ export type InvokeScriptCallArgument<LONG = Long> =
     | InvokeScriptCallBinaryArgument
     | InvokeScriptCallBooleanArgument
     | InvokeScriptCallIntegerArgument<LONG>
-    | InvokeScriptCallUnionArgument
+    | InvokeScriptCallUnionArgument<LONG>
     | InvokeScriptCallListArgument<
           LONG,
           | InvokeScriptCallStringArgument
           | InvokeScriptCallBinaryArgument
           | InvokeScriptCallBooleanArgument
-          | InvokeScriptCallIntegerArgument
+          | InvokeScriptCallIntegerArgument<LONG>
       >;
 
 export type InvokeScriptCallArgumentGeneric<Type, Value> = {
@@ -38,28 +38,27 @@ export type InvokeScriptCallArgumentGeneric<Type, Value> = {
 };
 
 export type InvokeScriptCallStringArgument = InvokeScriptCallArgumentGeneric<
-    EInvokeArgumentType.STRING,
+    InvokeArgumentType.STRING,
     string
 >;
 export type InvokeScriptCallBinaryArgument = InvokeScriptCallArgumentGeneric<
-    EInvokeArgumentType.BINARY,
+    InvokeArgumentType.BINARY,
     Base64string
 >;
 export type InvokeScriptCallBooleanArgument = InvokeScriptCallArgumentGeneric<
-    EInvokeArgumentType.BOOLEAN,
+    InvokeArgumentType.BOOLEAN,
     boolean
 >;
 export type InvokeScriptCallIntegerArgument<
     LONG = Long
-> = InvokeScriptCallArgumentGeneric<EInvokeArgumentType.INTEGER, LONG>;
-export type InvokeScriptCallUnionArgument = InvokeScriptCallArgumentGeneric<
-    EInvokeArgumentType.UNION,
-    boolean | string | Base64string | Long
-> & {
-    valueType: EInvokeArgumentType.BINARY
-             | EInvokeArgumentType.BOOLEAN
-             | EInvokeArgumentType.INTEGER
-             | EInvokeArgumentType.STRING
+> = InvokeScriptCallArgumentGeneric<InvokeArgumentType.INTEGER, LONG>;
+export type InvokeScriptCallUnionArgument<
+LONG = Long
+> = InvokeScriptCallArgumentGeneric<InvokeArgumentType.UNION, LONG> & {
+    valueType: InvokeArgumentType.BINARY
+             | InvokeArgumentType.BOOLEAN
+             | InvokeArgumentType.INTEGER
+             | InvokeArgumentType.STRING
 };
 export type InvokeScriptCallListArgument<
     LONG,
@@ -67,6 +66,6 @@ export type InvokeScriptCallListArgument<
         | InvokeScriptCallStringArgument
         | InvokeScriptCallBinaryArgument
         | InvokeScriptCallBooleanArgument
-        | InvokeScriptCallIntegerArgument
-        | InvokeScriptCallUnionArgument
+        | InvokeScriptCallIntegerArgument<LONG>
+        | InvokeScriptCallUnionArgument<LONG>
 > = InvokeScriptCallArgumentGeneric<'list', Array<ITEMS>>;
