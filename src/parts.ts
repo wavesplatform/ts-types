@@ -1,5 +1,6 @@
 import { DATA_FIELD_TYPE } from './index';
-import { Long, Base64string } from './common';
+import { AssetDecimals, Long, Base64string } from './common';
+import { InvokeScriptPayment } from './invoke';
 
 export interface WithId {
     id: string;
