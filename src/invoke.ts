@@ -1,13 +1,5 @@
 import { Base64string, Long } from './common';
 
-export enum InvokeArgumentType {
-    INTEGER = 'integer',
-    STRING = 'string',
-    BOOLEAN = 'boolean',
-    BINARY = 'binary',
-    UNION = 'union',
-}
-
 export type InvokeScriptCall<LONG = Long> = {
     function: string;
     args: Array<InvokeScriptCallArgument<LONG>>;
@@ -38,27 +30,24 @@ export type InvokeScriptCallArgumentGeneric<Type, Value> = {
 };
 
 export type InvokeScriptCallStringArgument = InvokeScriptCallArgumentGeneric<
-    InvokeArgumentType.STRING,
+    'string',
     string
 >;
 export type InvokeScriptCallBinaryArgument = InvokeScriptCallArgumentGeneric<
-    InvokeArgumentType.BINARY,
+    'binary',
     Base64string
 >;
 export type InvokeScriptCallBooleanArgument = InvokeScriptCallArgumentGeneric<
-    InvokeArgumentType.BOOLEAN,
+    'boolean',
     boolean
 >;
 export type InvokeScriptCallIntegerArgument<
     LONG = Long
-> = InvokeScriptCallArgumentGeneric<InvokeArgumentType.INTEGER, LONG>;
+> = InvokeScriptCallArgumentGeneric<'integer', LONG>;
 export type InvokeScriptCallUnionArgument<
-LONG = Long
-> = InvokeScriptCallArgumentGeneric<InvokeArgumentType.UNION, LONG> & {
-    valueType: InvokeArgumentType.BINARY
-             | InvokeArgumentType.BOOLEAN
-             | InvokeArgumentType.INTEGER
-             | InvokeArgumentType.STRING
+    LONG = Long
+> = InvokeScriptCallArgumentGeneric<'union', LONG> & {
+    valueType: 'binary' | 'boolean' | 'integer' | 'string';
 };
 export type InvokeScriptCallListArgument<
     LONG,
