@@ -46,7 +46,10 @@ export type InvokeScriptCallIntegerArgument<
 > = InvokeScriptCallArgumentGeneric<'integer', LONG>;
 export type InvokeScriptCallUnionArgument<
     LONG = Long
-> = InvokeScriptCallArgumentGeneric<'union', LONG> & {
+> = InvokeScriptCallArgumentGeneric<
+    'union',
+    LONG | string | Base64string | boolean
+> & {
     valueType: 'binary' | 'boolean' | 'integer' | 'string';
 };
 export type InvokeScriptCallListArgument<
