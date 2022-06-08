@@ -533,8 +533,12 @@ export type TransferTransaction<LONG = Long> =
     | TransferTransactionV2<LONG>
     | TransferTransactionV3<LONG>;
 
-export type TransferTransactionFromNode<LONG = Long> =
-    TransferTransaction<LONG> & WithId & WithApplicationStatus & WithApiMixin;
+export type TransferTransactionFromNode<LONG = Long> = TransferTransaction<
+    LONG
+> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin;
 
 export type LeaseTransaction<LONG = Long> =
     | LeaseTransactionV1<LONG>
@@ -577,13 +581,14 @@ export type CancelLeaseTransaction<LONG = Long> =
     | CancelLeaseTransactionV2<LONG>
     | CancelLeaseTransactionV3<LONG>;
 
-export type CancelLeaseTransactionFromNode<LONG = Long> =
-    CancelLeaseTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type CancelLeaseTransactionFromNode<
+    LONG = Long
+> = CancelLeaseTransaction<LONG> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type AliasTransaction<LONG = Long> =
     | AliasTransactionV1<LONG>
@@ -600,13 +605,14 @@ export type MassTransferTransaction<LONG = Long> =
     | MassTransferTransactionV1<LONG>
     | MassTransferTransactionV2<LONG>;
 
-export type MassTransferTransactionFromNode<LONG = Long> =
-    MassTransferTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type MassTransferTransactionFromNode<
+    LONG = Long
+> = MassTransferTransaction<LONG> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type DataTransaction<LONG = Long> =
     | DataTransactionV1<LONG>
@@ -623,50 +629,54 @@ export type SetScriptTransaction<LONG = Long> =
     | SetScriptTransactionV1<LONG>
     | SetScriptTransactionV2<LONG>;
 
-export type SetScriptTransactionFromNode<LONG = Long> =
-    SetScriptTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type SetScriptTransactionFromNode<LONG = Long> = SetScriptTransaction<
+    LONG
+> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type SponsorshipTransaction<LONG = Long> =
     | SponsorshipTransactionV1<LONG>
     | SponsorshipTransactionV2<LONG>;
 
-export type SponsorshipTransactionFromNode<LONG = Long> =
-    SponsorshipTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type SponsorshipTransactionFromNode<
+    LONG = Long
+> = SponsorshipTransaction<LONG> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type ExchangeTransaction<LONG = Long> =
     | ExchangeTransactionV1<LONG>
     | ExchangeTransactionV2<LONG>
     | ExchangeTransactionV3<LONG>;
 
-export type ExchangeTransactionFromNode<LONG = Long> =
-    ExchangeTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type ExchangeTransactionFromNode<LONG = Long> = ExchangeTransaction<
+    LONG
+> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type SetAssetScriptTransaction<LONG = Long> =
     | SetAssetScriptTransactionV1<LONG>
     | SetAssetScriptTransactionV2<LONG>;
 
-export type SetAssetScriptTransactionFromNode<LONG = Long> =
-    SetAssetScriptTransaction<LONG> &
-        WithId &
-        WithApplicationStatus &
-        WithApiMixin & {
-            feeAssetId: null;
-        };
+export type SetAssetScriptTransactionFromNode<
+    LONG = Long
+> = SetAssetScriptTransaction<LONG> &
+    WithId &
+    WithApplicationStatus &
+    WithApiMixin & {
+        feeAssetId: null;
+    };
 
 export type InvokeScriptTransaction<LONG = Long> =
     | InvokeScriptTransactionV1<LONG>
@@ -681,8 +691,9 @@ export type InvokeScriptTransactionFromNode<LONG = Long> = SignedTransaction<
         stateChanges: TStateChanges;
     };
 
-export type UpdateAssetInfoTransaction<LONG = Long> =
-    UpdateAssetInfoTransactionV1<LONG>;
+export type UpdateAssetInfoTransaction<
+    LONG = Long
+> = UpdateAssetInfoTransactionV1<LONG>;
 
 export type UpdateAssetInfoTransactionFromNode<LONG = Long> = SignedTransaction<
     UpdateAssetInfoTransaction<LONG>
