@@ -10,6 +10,8 @@ import type { BaseTransaction } from './index';
 
 export type CommitToGeneractionTransactionFields<LONG = Long> = {
     generationPeriodStart: number;
+    endorserPublicKey: string;
+    commitmentSignature: string;
 };
 
 export type CommitToGeneractionTransactionV1<LONG> = WithVersion<
@@ -31,8 +33,6 @@ export type CommitToGeneractionTransactionFromNode<LONG = Long> = SignedTransact
     WithApplicationStatus &
     WithApiMixin & {
         feeAssetId: null;
-        endorserPublicKey: string;
-        commitmentSignature: string;
     };
 
 
