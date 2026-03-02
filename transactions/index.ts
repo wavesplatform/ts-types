@@ -15,10 +15,10 @@ import type {
     CancelLeaseTransactionMap,
 } from './cancel-lease';
 import type {
-    CommitToGeneractionTransaction,
-    CommitToGeneractionTransactionFromNode,
-    CommitToGeneractionTransactionMap,
-} from './commit-to-generaction';
+    CommitToGenerationTransaction,
+    CommitToGenerationTransactionFromNode,
+    CommitToGenerationTransactionMap,
+} from './commit-to-generation';
 import type {
     DataTransaction,
     DataTransactionFromNode,
@@ -123,7 +123,7 @@ export type Transaction<LONG = Long> =
     | SetAssetScriptTransaction<LONG>
     | InvokeScriptTransaction<LONG>
     | UpdateAssetInfoTransaction<LONG>
-    | CommitToGeneractionTransaction<LONG>;
+    | CommitToGenerationTransaction<LONG>;
 
 export type TransactionMap<LONG = Long> = {
     [TRANSACTION_TYPE.GENESIS]: GenesisTransaction<LONG>;
@@ -143,7 +143,7 @@ export type TransactionMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransaction<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransaction<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransaction<LONG>;
-    [TRANSACTION_TYPE.COMMIT_TO_GENERATION]: CommitToGeneractionTransaction<LONG>;
+    [TRANSACTION_TYPE.COMMIT_TO_GENERATION]: CommitToGenerationTransaction<LONG>;
 };
 
 export type TransactionVersionsMap<LONG = Long> = {
@@ -164,7 +164,7 @@ export type TransactionVersionsMap<LONG = Long> = {
     [TRANSACTION_TYPE.SET_ASSET_SCRIPT]: SetAssetScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.INVOKE_SCRIPT]: InvokeScriptTransactionMap<LONG>;
     [TRANSACTION_TYPE.UPDATE_ASSET_INFO]: UpdateAssetInfoTransactionMap<LONG>;
-    [TRANSACTION_TYPE.COMMIT_TO_GENERATION]: CommitToGeneractionTransactionMap<LONG>;
+    [TRANSACTION_TYPE.COMMIT_TO_GENERATION]: CommitToGenerationTransactionMap<LONG>;
 };
 
 export type Omit<A extends Record<string, any>, B extends keyof A> = {
@@ -218,7 +218,7 @@ export type TransactionFromNode<LONG = Long> =
     | SetAssetScriptTransactionFromNode<LONG>
     | InvokeScriptTransactionFromNode<LONG>
     | UpdateAssetInfoTransactionFromNode<LONG>
-    | CommitToGeneractionTransactionFromNode<LONG>;
+    | CommitToGenerationTransactionFromNode<LONG>;
 
 export type {
     AliasTransactionFields,
@@ -248,12 +248,12 @@ export type {
     CancelLeaseTransactionFromNode,
 } from './cancel-lease';
 export type {
-    CommitToGeneractionTransactionFields,
-    CommitToGeneractionTransactionV1,
-    CommitToGeneractionTransactionMap,
-    CommitToGeneractionTransaction,
-    CommitToGeneractionTransactionFromNode,
-} from './commit-to-generaction';
+    CommitToGenerationTransactionFields,
+    CommitToGenerationTransactionV1,
+    CommitToGenerationTransactionMap,
+    CommitToGenerationTransaction,
+    CommitToGenerationTransactionFromNode,
+} from './commit-to-generation';
 export type {
     DataTransactionFields,
     DataTransactionV1,
